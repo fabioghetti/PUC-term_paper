@@ -1,5 +1,7 @@
 package com.ghetti.fabio.controle.entrega.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 
 public class Entrega {
@@ -23,7 +25,7 @@ public class Entrega {
 	
 	private Endereco endereco;
 	
-	private Historico historico;
+	private List<Historico> historico;
 	
 	private Avaliacao avaliacao;
 
@@ -32,7 +34,7 @@ public class Entrega {
 	}
 
 	public Entrega(String id, String status, String fornecedor, String vendedorExterno, String cliente,
-			String dataPostagem, String dataEntrega, String telefone, Endereco endereco, Historico historico,
+			String dataPostagem, String dataEntrega, String telefone, Endereco endereco, List<Historico> historico,
 			Avaliacao avaliacao) {
 		super();
 		this.id = id;
@@ -128,11 +130,11 @@ public class Entrega {
 		this.endereco = endereco;
 	}
 
-	public Historico getHistorico() {
+	public List<Historico> getHistorico() {
 		return historico;
 	}
 
-	public void setHistorico(Historico historico) {
+	public void setHistorico(List<Historico> historico) {
 		this.historico = historico;
 	}
 }

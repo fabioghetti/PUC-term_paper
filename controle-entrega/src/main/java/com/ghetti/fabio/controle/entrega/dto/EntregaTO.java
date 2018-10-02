@@ -1,5 +1,7 @@
 package com.ghetti.fabio.controle.entrega.dto;
 
+import java.util.List;
+
 public class EntregaTO {
 
 	private String status;
@@ -18,7 +20,7 @@ public class EntregaTO {
 	
 	private EnderecoTO enderecoTO;
 	
-	private HistoricoTO historicoTO;
+	private List<HistoricoTO> historicoTO;
 	
 	private AvaliacaoTO avaliacaoTO;
 
@@ -27,7 +29,7 @@ public class EntregaTO {
 	}
 
 	public EntregaTO(String status, String fornecedor, String vendedorExterno, String cliente, String dataPostagem,
-			String dataEntrega, String telefone, EnderecoTO enderecoTO, HistoricoTO historicoTO,
+			String dataEntrega, String telefone, EnderecoTO enderecoTO, List<HistoricoTO> historicoTO,
 			AvaliacaoTO avaliacaoTO) {
 		super();
 		this.status = status;
@@ -106,11 +108,11 @@ public class EntregaTO {
 		this.enderecoTO = enderecoTO;
 	}
 
-	public HistoricoTO getHistoricoTO() {
+	public List<HistoricoTO> getHistoricoTO() {
 		return historicoTO;
 	}
 
-	public void setHistoricoTO(HistoricoTO historicoTO) {
+	public void setHistoricoTO(List<HistoricoTO> historicoTO) {
 		this.historicoTO = historicoTO;
 	}
 

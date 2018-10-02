@@ -6,6 +6,7 @@ import com.ghetti.fabio.controle.entrega.model.Endereco;
 public class EnderecoConverter {
 
 	public static EnderecoTO convertToTransferObject(Endereco endereco) {
+		if (endereco == null) return null;
 		return new EnderecoTO(endereco.getRua(), endereco.getNumero(), endereco.getBairro(), 
 				endereco.getCidade(), endereco.getEstado(), endereco.getCep(), endereco.getComplemento());
 	}
