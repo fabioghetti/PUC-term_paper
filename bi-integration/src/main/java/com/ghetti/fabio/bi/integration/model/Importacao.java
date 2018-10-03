@@ -7,6 +7,8 @@ public class Importacao {
 	@Id
 	private String id;
 	
+	private String dataImportacao;
+	
 	private String fonteDado;
 	
 	private String status;
@@ -15,11 +17,20 @@ public class Importacao {
 		super();
 	}
 
-	public Importacao(String id, String fonteDado, String status) {
+	public Importacao(String id, String fonteDado, String status, String dataImportacao) {
 		super();
 		this.id = id;
 		this.fonteDado = fonteDado;
 		this.status = status;
+		this.dataImportacao = dataImportacao;
+	}
+
+	public String getDataImportacao() {
+		return dataImportacao;
+	}
+
+	public void setDataImportacao(String dataImportacao) {
+		this.dataImportacao = dataImportacao;
 	}
 
 	public String getId() {

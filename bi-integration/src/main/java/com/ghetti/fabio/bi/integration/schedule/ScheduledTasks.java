@@ -11,12 +11,11 @@ import com.ghetti.fabio.bi.integration.util.IntegrationUtil;
 
 @Component
 public class ScheduledTasks {
-
+	
 	@Autowired
-	ImportacaoService importacaoService;
+	private ImportacaoService importacaoService;
 	
 	private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
-
 	
     @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
