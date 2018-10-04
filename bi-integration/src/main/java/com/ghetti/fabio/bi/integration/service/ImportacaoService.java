@@ -33,13 +33,17 @@ public class ImportacaoService {
 	public void realizarImportacao() {
 		
 		
-		if (this.dadoJaImportado("ENTREGAS/VENDAS")) {
+		if (!this.dadoJaImportado("ENTREGAS/VENDAS")) {
 //			this.registrarImportacao("ENTREGAS/VENDAS", "SUCESSO");	
 			
 			VendaTO[] vendas = produtoService.getVendas(IntegrationUtil.getSimpleCurrentDateFormated());
 			
+			System.out.println(vendas.length);
+			System.out.println(vendas[0]);
 			EntregaTO[] entregas = entregaService.getEntregas(IntegrationUtil.getSimpleCurrentDateFormated());
 			
+			System.out.println(entregas.length);
+			System.out.println(entregas[0]);
 			EntregaVendaBIRequest requestBi = ConvertToBIModel.createModelSupportedByBI(entregas, vendas);
 			
 			biDataService.sendDataToBusinessIntelligence(requestBi);

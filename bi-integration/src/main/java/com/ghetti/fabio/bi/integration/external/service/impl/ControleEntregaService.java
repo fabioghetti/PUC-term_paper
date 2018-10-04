@@ -3,6 +3,7 @@ package com.ghetti.fabio.bi.integration.external.service.impl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientException;
 
 import com.ghetti.fabio.bi.integration.external.service.Service;
 import com.ghetti.fabio.bi.integration.external.services.control.delivery.model.EntregaTO;
@@ -17,10 +18,15 @@ public class ControleEntregaService extends Service {
 	protected String deliveryResource;
 
 	public EntregaTO[] getEntregas(final String data) {
-		ResponseEntity<EntregaTO[]> response = restTemplate.exchange(
-				this.createCompleteUrl(service, deliveryResource), 
-				HttpMethod.GET, this.createHeaders(), EntregaTO[].class);
-		return response.getBody();
+		try {
+			ResponseEntity<EntregaTO[]> response = restTemplate.exchange(
+					this.createCompleteUrl(service, deliveryResource), 
+					HttpMethod.GET, this.createHeaders(), EntregaTO[].class);
+			return response.getBody();
+		} catch (RestClientException e) {
+			log.error(e.getMessage());
+			return null;
+		}	
 	}
 	
 	
