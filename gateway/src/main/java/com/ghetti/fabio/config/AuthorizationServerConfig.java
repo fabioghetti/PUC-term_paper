@@ -22,7 +22,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
-			.withClient("applicationSPA")
+			.withClient("application")
 //			.secret("{noop}admin123")
 			.secret(new BCryptPasswordEncoder().encode("admin123"))
 			.scopes("read", "write")
