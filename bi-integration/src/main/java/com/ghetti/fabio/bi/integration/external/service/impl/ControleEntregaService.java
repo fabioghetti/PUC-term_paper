@@ -20,7 +20,7 @@ public class ControleEntregaService extends Service {
 	public EntregaTO[] getEntregas(final String data) {
 		try {
 			ResponseEntity<EntregaTO[]> response = restTemplate.exchange(
-					this.createCompleteUrl(service, deliveryResource), 
+					this.createCompleteUrl(service, deliveryResource, data), 
 					HttpMethod.GET, this.createHeaders(), EntregaTO[].class);
 			return response.getBody();
 		} catch (RestClientException e) {

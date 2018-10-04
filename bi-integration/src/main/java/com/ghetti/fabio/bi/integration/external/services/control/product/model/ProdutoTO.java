@@ -1,8 +1,6 @@
 package com.ghetti.fabio.bi.integration.external.services.control.product.model;
 
-public class ProdutoTO {
-
-	private String id;
+public class ProdutoTO extends BasicTO {
 	
 	private String descricao;
 	
@@ -18,9 +16,8 @@ public class ProdutoTO {
 		super();
 	}
 
-	public ProdutoTO(String id, String descricao, String fornecedor, String setor, Integer quantidade, Double valor) {
+	public ProdutoTO(String descricao, String fornecedor, String setor, Integer quantidade, Double valor) {
 		super();
-		this.id = id;
 		this.descricao = descricao;
 		this.fornecedor = fornecedor;
 		this.setor = setor;
@@ -28,13 +25,6 @@ public class ProdutoTO {
 		this.valor = valor;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getDescricao() {
 		return descricao;

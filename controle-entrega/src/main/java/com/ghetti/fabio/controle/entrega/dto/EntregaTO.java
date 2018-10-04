@@ -18,11 +18,11 @@ public class EntregaTO {
 	
 	private String telefone;
 	
-	private EnderecoTO enderecoTO;
+	private EnderecoTO endereco;
 	
-	private List<HistoricoTO> historicoTO;
+	private List<HistoricoTO> historico;
 	
-	private AvaliacaoTO avaliacaoTO;
+	private AvaliacaoTO avaliacao;
 
 	public EntregaTO() {
 		super();
@@ -39,9 +39,9 @@ public class EntregaTO {
 		this.dataPostagem = dataPostagem;
 		this.dataEntrega = dataEntrega;
 		this.telefone = telefone;
-		this.enderecoTO = enderecoTO;
-		this.historicoTO = historicoTO;
-		this.avaliacaoTO = avaliacaoTO;
+		this.endereco = enderecoTO;
+		this.historico = historicoTO;
+		this.avaliacao = avaliacaoTO;
 	}
 
 	public String getStatus() {
@@ -100,27 +100,27 @@ public class EntregaTO {
 		this.telefone = telefone;
 	}
 
-	public EnderecoTO getEnderecoTO() {
-		return enderecoTO;
+	public EnderecoTO getEndereco() {
+		return endereco;
 	}
 
-	public void setEnderecoTO(EnderecoTO enderecoTO) {
-		this.enderecoTO = enderecoTO;
+	public void setEndereco(EnderecoTO enderecoTO) {
+		this.endereco = enderecoTO;
 	}
 
-	public List<HistoricoTO> getHistoricoTO() {
-		return historicoTO;
+	public List<HistoricoTO> getHistorico() {
+		return historico;
 	}
 
-	public void setHistoricoTO(List<HistoricoTO> historicoTO) {
-		this.historicoTO = historicoTO;
+	public void setHistorico(List<HistoricoTO> historicoTO) {
+		this.historico = historicoTO;
 	}
 
-	public AvaliacaoTO getAvaliacaoTO() {
-		return avaliacaoTO;
+	public AvaliacaoTO getAvaliacao() {
+		return avaliacao;
 	}
 
-	public void setAvaliacaoTO(AvaliacaoTO avaliacaoTO) {
-		this.avaliacaoTO = avaliacaoTO;
+	public void setAvaliacao(AvaliacaoTO avaliacaoTO) {
+		this.avaliacao = avaliacaoTO;
 	}
 }

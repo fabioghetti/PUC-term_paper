@@ -2,6 +2,8 @@ package com.ghetti.fabio.bi.integration.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,16 +21,16 @@ import com.ghetti.fabio.bi.integration.util.IntegrationUtil;
 @Service
 public class ImportacaoService {
 
-
 	@Autowired
 	private ControleProdutoService produtoService;
 	@Autowired
 	private ControleEntregaService entregaService;
 	@Autowired
 	private BIDataService biDataService;
-	
 	@Autowired
 	private ImportacaoRepository importacaoRepository;
+	
+	private static final Logger log = LoggerFactory.getLogger(ImportacaoService.class);
 	
 	public void realizarImportacao() {
 		
@@ -37,14 +39,13 @@ public class ImportacaoService {
 //			this.registrarImportacao("ENTREGAS/VENDAS", "SUCESSO");	
 			
 			VendaTO[] vendas = produtoService.getVendas(IntegrationUtil.getSimpleCurrentDateFormated());
+			log.info("JSON recuperado do microserviço controle-produto: \n {}", IntegrationUtil.getJson(vendas));
 			
-			System.out.println(vendas.length);
-			System.out.println(vendas[0]);
 			EntregaTO[] entregas = entregaService.getEntregas(IntegrationUtil.getSimpleCurrentDateFormated());
+			log.info("JSON recuperado do microserviço controle-entrega: \n {}", IntegrationUtil.getJson(entregas));
 			
-			System.out.println(entregas.length);
-			System.out.println(entregas[0]);
 			EntregaVendaBIRequest requestBi = ConvertToBIModel.createModelSupportedByBI(entregas, vendas);
+			log.info("JSON gerado para ser enviado ao BI: \n {}", IntegrationUtil.getJson(requestBi));
 			
 			biDataService.sendDataToBusinessIntelligence(requestBi);
 			

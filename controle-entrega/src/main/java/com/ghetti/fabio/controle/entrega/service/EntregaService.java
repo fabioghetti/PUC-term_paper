@@ -17,12 +17,12 @@ public class EntregaService {
 	@Autowired
 	private EntregaRepository entregaRepository;
 	
-	public List<EntregaTO> buscarEntregas(String status) {
+	public List<EntregaTO> buscarEntregas(String dataEntrega) {
 		List<Entrega> entregas = new ArrayList<Entrega>();
-		if (status == null || "".equals(status)) {
+		if (dataEntrega == null || "".equals(dataEntrega)) {
 			entregas = entregaRepository.findAll();
 		} else {
-			entregas = entregaRepository.findByStatus(status);
+			entregas = entregaRepository.findByDataEntrega(dataEntrega);
 		}
 		List<EntregaTO> entregasTO = new ArrayList<EntregaTO>();
 		for (Entrega entrega : entregas) {

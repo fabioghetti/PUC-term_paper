@@ -2,12 +2,7 @@ package com.ghetti.fabio.bi.integration.external.services.control.product.model;
 
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
-
-public class VendaTO {
-
-	@Id
-	private String id;
+public class VendaTO extends BasicTO {
 	
 	private String cliente;
 	
@@ -35,7 +30,7 @@ public class VendaTO {
 
 	@Override
 	public String toString() {
-		return "VendaTO [id=" + id + ", cliente=" + cliente + ", data=" + data + ", status=" + status
+		return "VendaTO [cliente=" + cliente + ", data=" + data + ", status=" + status
 				+ ", numeroNotaFiscal=" + numeroNotaFiscal + ", desconto=" + desconto + ", cupom=" + cupom
 				+ ", promocao=" + promocao + ", vendedorExterno=" + vendedorExterno + ", formaPagamento="
 				+ formaPagamento + ", dataEntrega=" + dataEntrega + ", tipoEntrega=" + tipoEntrega + ", produto="
@@ -46,11 +41,10 @@ public class VendaTO {
 		super();
 	}
 
-	public VendaTO(String id, String cliente, String data, String status, String numeroNotaFiscal, String desconto,
+	public VendaTO(String cliente, String data, String status, String numeroNotaFiscal, String desconto,
 			String cupom, String promocao, String vendedorExterno, String formaPagamento, String dataEntrega,
 			String tipoEntrega, List<ProdutoTO> produto) {
 		super();
-		this.id = id;
 		this.cliente = cliente;
 		this.data = data;
 		this.status = status;
@@ -63,14 +57,6 @@ public class VendaTO {
 		this.dataEntrega = dataEntrega;
 		this.tipoEntrega = tipoEntrega;
 		this.produto = produto;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getCliente() {

@@ -23,8 +23,12 @@ public abstract class Service {
 	@Value("${external.service.base.url}")
 	private String BASE_URL;
 
-	protected String createCompleteUrl(String service, String resource) {
-		return BASE_URL + service + resource;
+	protected String createCompleteUrl(String service, String resource, String data) {
+		String url = BASE_URL + service + resource;
+		if (data != null && !"".equals(data)) {
+			url+="?data="+data;
+		}
+		return url;
 	}
 
 	protected HttpEntity<String> createHeaders() {

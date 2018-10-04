@@ -20,8 +20,8 @@ public class EntregaResource {
 	private EntregaService entregaService;
 	
 	@GetMapping()
-	public ResponseEntity<List<EntregaTO>> buscarPlanetas(@RequestParam(value = "status", required = false) String status) {
-		List<EntregaTO> entregas = entregaService.buscarEntregas(status);
+	public ResponseEntity<List<EntregaTO>> buscarEntregas(@RequestParam(value = "data", required = false) String data) {
+		List<EntregaTO> entregas = entregaService.buscarEntregas(data);
 		return entregas != null ? ResponseEntity.ok(entregas) : ResponseEntity.notFound().build();
 	}
 }

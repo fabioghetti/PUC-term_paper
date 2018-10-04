@@ -29,6 +29,14 @@ public class EntregaTO {
 	
 	private AvaliacaoTO avaliacao;
 
+	@Override
+	public String toString() {
+		return "EntregaTO [id=" + id + ", status=" + status + ", fornecedor=" + fornecedor + ", vendedorExterno="
+				+ vendedorExterno + ", cliente=" + cliente + ", dataPostagem=" + dataPostagem + ", dataEntrega="
+				+ dataEntrega + ", telefone=" + telefone + ", endereco=" + endereco + ", historico=" + historico
+				+ ", avaliacao=" + avaliacao + "]";
+	}
+
 	public EntregaTO() {
 		super();
 	}

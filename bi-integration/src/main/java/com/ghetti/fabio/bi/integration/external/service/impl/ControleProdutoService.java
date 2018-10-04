@@ -20,7 +20,7 @@ public class ControleProdutoService extends Service{
 	public VendaTO[] getVendas(final String data) {
 		try {
 			ResponseEntity<VendaTO[]> response = restTemplate.exchange(
-					this.createCompleteUrl(service, salesResource), 
+					this.createCompleteUrl(service, salesResource, data), 
 					HttpMethod.GET, this.createHeaders(), VendaTO[].class);
 			return response.getBody();
 		} catch (RestClientException e) {
