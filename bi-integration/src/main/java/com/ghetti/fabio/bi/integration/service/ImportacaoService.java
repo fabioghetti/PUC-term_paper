@@ -5,8 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ghetti.fabio.bi.integration.convert.ConvertToBIModel;
+import com.ghetti.fabio.bi.integration.external.service.bi.BIDataService;
+import com.ghetti.fabio.bi.integration.external.service.impl.ControleEntregaService;
 import com.ghetti.fabio.bi.integration.external.service.impl.ControleProdutoService;
+import com.ghetti.fabio.bi.integration.external.services.control.delivery.model.EntregaTO;
 import com.ghetti.fabio.bi.integration.external.services.control.product.model.VendaTO;
+import com.ghetti.fabio.bi.integration.external.services.model.EntregaVendaBIRequest;
 import com.ghetti.fabio.bi.integration.model.Importacao;
 import com.ghetti.fabio.bi.integration.repository.ImportacaoRepository;
 import com.ghetti.fabio.bi.integration.util.IntegrationUtil;
@@ -17,6 +22,10 @@ public class ImportacaoService {
 
 	@Autowired
 	private ControleProdutoService produtoService;
+	@Autowired
+	private ControleEntregaService entregaService;
+	@Autowired
+	private BIDataService biDataService;
 	
 	@Autowired
 	private ImportacaoRepository importacaoRepository;
@@ -24,13 +33,17 @@ public class ImportacaoService {
 	public void realizarImportacao() {
 		
 		
-		if (!this.dadoJaImportado("ENTREGAS/VENDAS")) {
-			this.registrarImportacao("ENTREGAS/VENDAS", "SUCESSO");	
+		if (this.dadoJaImportado("ENTREGAS/VENDAS")) {
+//			this.registrarImportacao("ENTREGAS/VENDAS", "SUCESSO");	
 			
 			VendaTO[] vendas = produtoService.getVendas(IntegrationUtil.getSimpleCurrentDateFormated());
 			
-			System.out.println(vendas.length);
-			System.out.println(vendas[0]);
+			EntregaTO[] entregas = entregaService.getEntregas(IntegrationUtil.getSimpleCurrentDateFormated());
+			
+			EntregaVendaBIRequest requestBi = ConvertToBIModel.createModelSupportedByBI(entregas, vendas);
+			
+			biDataService.sendDataToBusinessIntelligence(requestBi);
+			
 		}
 		
 	}

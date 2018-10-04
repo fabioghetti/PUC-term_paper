@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ghetti.fabio.bi.integration.external.service.Service;
 import com.ghetti.fabio.bi.integration.external.services.control.product.model.VendaTO;
 
@@ -24,13 +23,4 @@ public class ControleProdutoService extends Service{
 		return response.getBody();
 	}
 	
-	private void getFromJson(String json) {
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-//			return mapper.readValue(json, new Venda());
-			System.out.println(json);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 }
