@@ -17,7 +17,7 @@ public class ScheduledTasks {
 	
 	private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
 	
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 15000)
     public void reportCurrentTime() {
     	
         log.info("Começando a importar as informações para o BI. {}", IntegrationUtil.getCurrentDateFormated());

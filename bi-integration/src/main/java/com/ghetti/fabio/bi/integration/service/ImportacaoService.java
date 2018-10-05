@@ -14,6 +14,7 @@ import com.ghetti.fabio.bi.integration.external.service.impl.ControleProdutoServ
 import com.ghetti.fabio.bi.integration.external.services.control.delivery.model.EntregaTO;
 import com.ghetti.fabio.bi.integration.external.services.control.product.model.VendaTO;
 import com.ghetti.fabio.bi.integration.external.services.model.EntregaVendaBIRequest;
+import com.ghetti.fabio.bi.integration.external.services.model.EntregaVendaBIResponse;
 import com.ghetti.fabio.bi.integration.model.Importacao;
 import com.ghetti.fabio.bi.integration.repository.ImportacaoRepository;
 import com.ghetti.fabio.bi.integration.util.IntegrationUtil;
@@ -36,19 +37,25 @@ public class ImportacaoService {
 		
 		
 		if (!this.dadoJaImportado("ENTREGAS/VENDAS")) {
-//			this.registrarImportacao("ENTREGAS/VENDAS", "SUCESSO");	
 			
-			VendaTO[] vendas = produtoService.getVendas(IntegrationUtil.getSimpleCurrentDateFormated());
+			
+			VendaTO[] vendas = produtoService.getVendas(IntegrationUtil.getYesterdayDate());
 			log.info("JSON recuperado do microserviço controle-produto: \n {}", IntegrationUtil.getJson(vendas));
 			
-			EntregaTO[] entregas = entregaService.getEntregas(IntegrationUtil.getSimpleCurrentDateFormated());
+			EntregaTO[] entregas = entregaService.getEntregas(IntegrationUtil.getYesterdayDate());
 			log.info("JSON recuperado do microserviço controle-entrega: \n {}", IntegrationUtil.getJson(entregas));
 			
 			EntregaVendaBIRequest requestBi = ConvertToBIModel.createModelSupportedByBI(entregas, vendas);
 			log.info("JSON gerado para ser enviado ao BI: \n {}", IntegrationUtil.getJson(requestBi));
 			
-			biDataService.sendDataToBusinessIntelligence(requestBi);
+			EntregaVendaBIResponse biResponse = biDataService.sendDataToBusinessIntelligence(requestBi);
 			
+			if ("sucesso".equals(biResponse.getStatus()))
+				this.registrarImportacao("ENTREGAS/VENDAS", "SUCESSO");
+			else
+				this.registrarImportacao("ENTREGAS/VENDAS", "ERROR");
+		} else {
+			log.info("Não existem mais dados para serem importados hoje.");
 		}
 		
 	}
